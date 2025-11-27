@@ -2656,8 +2656,16 @@ input, select, textarea {
 		}
 
 		#header h2, #header h3, #header h4, #header h5, #header h6 {
-			color: #d1d1d1;
+			/*color: #d1d1d1;*/
+			color: #a9a9a9;
 		}
+
+/* #a9a9a9	Dark Gray	Standard named HTML color ("DarkGray")
+#808080	Gray	Classic medium–dark gray
+#696969	Dim Gray	Slightly darker and muted
+#4f4f4f	Charcoal Gray	Strong, darker tone
+#3a3a3a	Dark Charcoal	Deep dark gray close to black
+#2e2e2e	Jet Gray	Very dark, nearly black */
 
 		#header h1 {
 			color: rgba(255, 255, 255, 0.5);
