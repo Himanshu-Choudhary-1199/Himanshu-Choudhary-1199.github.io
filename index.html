@@ -10,6 +10,34 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<!-- Highlight the current section in the menu -->
+		<style>
+			html { scroll-behavior: smooth; }
+			#nav a.nav-link {
+				position: relative;
+				display: inline-block;
+				padding: 0.15em 0 0.15em 0.9em;
+				color: rgba(255, 255, 255, 0.55);
+				border-bottom: none;
+				transition: color 0.25s ease, transform 0.25s ease;
+			}
+			#nav a.nav-link::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 50%;
+				width: 3px;
+				height: 0;
+				border-radius: 2px;
+				background: #e8b04a;
+				transform: translateY(-50%);
+				transition: height 0.25s ease;
+			}
+			#nav a.nav-link:hover { color: rgba(255, 255, 255, 0.85); }
+			#nav a.nav-link.is-current { color: #ffffff; transform: translateX(-4px); }
+			#nav a.nav-link.is-current::before { height: 1.1em; }
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -1263,6 +1291,32 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+					<!-- Highlight the current section in the menu -->
+		<script>
+		(function () {
+			var items = Array.prototype.slice.call(document.querySelectorAll('#nav a[href^="#"]')).map(function (a) {
+				a.classList.remove('active');
+				a.classList.add('nav-link');
+				return { link: a, section: document.querySelector(a.getAttribute('href')) };
+			}).filter(function (it) { return it.section; });
+
+			function updateNav() {
+				var marker = window.innerHeight * 0.35, current = items[0];
+				items.forEach(function (it) {
+					if (it.section.getBoundingClientRect().top <= marker) current = it;
+				});
+				if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+					current = items[items.length - 1];
+				}
+				items.forEach(function (it) { it.link.classList.toggle('is-current', it === current); });
+			}
+			window.addEventListener('scroll', updateNav, { passive: true });
+			window.addEventListener('resize', updateNav);
+			window.addEventListener('load', updateNav);
+			updateNav();
+		})();
+		</script>
 
 	</body>
 </html>
